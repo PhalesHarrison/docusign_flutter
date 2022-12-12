@@ -4,6 +4,7 @@ import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:docusign_flutter/model/access_token_model.dart';
 import 'package:docusign_flutter/model/add_documents_model.dart';
 import 'package:docusign_flutter/model/delete_documents_model.dart';
+import 'package:docusign_flutter/model/delete_recipients_model.dart';
 import 'package:docusign_flutter/model/envelope_definition_model.dart';
 import 'package:docusign_flutter/model/input_token_model.dart';
 import 'package:docusign_flutter/model/recipient_view_request_model.dart';
@@ -77,6 +78,13 @@ class DocusignFlutter {
         'deleteDocuments', [accountId, envelopeId, jsonDeleteDocumentsModel]);
   }
 
+  static Future<String?> deleteRecipients(String accountId, String envelopeId,
+      DeleteRecipientsModel deleteRecipientsModel) async {
+    String jsonDeleteRecipientsModel = jsonEncode(deleteRecipientsModel);
+    return await _methodsChannel.invokeMethod(
+        'deleteRecipients', [accountId, envelopeId, jsonDeleteRecipientsModel]);
+  }
+
   static Future<String?> addDocuments(String accountId, String envelopeId,
       AddDocumentsModel addDocumentsModel) async {
     String jsonAddDocumentsModel = jsonEncode(addDocumentsModel);
@@ -89,13 +97,6 @@ class DocusignFlutter {
     String jsonRecipientsModel = jsonEncode(recipientsModel);
     return await _methodsChannel.invokeMethod(
         'updateRecipients', [accountId, envelopeId, jsonRecipientsModel]);
-  }
-
-  static Future<String?> deleteRecipients(String accountId, String envelopeId,
-      RecipientsModel recipientsModel) async {
-    String jsonRecipientsModel = jsonEncode(recipientsModel);
-    return await _methodsChannel.invokeMethod(
-        'deleteRecipients', [accountId, envelopeId, jsonRecipientsModel]);
   }
 
   static Future<String?> createRecipientTabs(String accountId,
