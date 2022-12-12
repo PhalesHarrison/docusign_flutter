@@ -1,7 +1,7 @@
 name: docusign_flutter
 description: Docusign API for flutter.
 version: 0.0.3
-homepage: https://github.com/bentouch-digital/docusign-flutter.git
+homepage: https://github.com/PhalesHarrison/docusign_flutter.git
 
 environment:
   sdk: '>=2.18.4 <3.0.0'
